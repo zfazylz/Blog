@@ -1,28 +1,25 @@
-﻿using Blog.Data.FileManager;
+﻿using System.Threading.Tasks;
+using Blog.Data.FileManager;
 using Blog.Data.Repository;
 using Blog.Models;
 using Blog.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Blog.Controllers
 {
     [Authorize(Roles = "Admin")]
     public class PanelController : Controller
     {
-        private IRepository _repo;
-        private IFileManager _fileManager;
+        private readonly IFileManager _fileManager;
+        private readonly IRepository _repo;
 
         public PanelController(IRepository repo, IFileManager fileManager)
         {
             _repo = repo;
             _fileManager = fileManager;
         }
+
         public IActionResult Index()
         {
             var posts = _repo.GetAllPost();
@@ -31,19 +28,17 @@ namespace Blog.Controllers
 
         public IActionResult Edit(int? id)
         {
-            if (id == null)
-                return View(new PostViewModel());
-            else
+            if (id == null) return View(new PostViewModel());
+
+            var post = _repo.GetPost(id.Value);
+            return View(new PostViewModel
             {
-                var post = _repo.GetPost(id.Value);
-                return View(new PostViewModel
-                {
-                    Id = post.Id,
-                    Title = post.Title,
-                    Body = post.Body
-                });
-            }
+                Id = post.Id,
+                Title = post.Title,
+                Body = post.Body
+            });
         }
+
         [HttpPost]
         public async Task<IActionResult> Edit(PostViewModel postVm)
         {

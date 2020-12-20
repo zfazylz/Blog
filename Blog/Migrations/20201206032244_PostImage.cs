@@ -7,16 +7,16 @@ namespace Blog.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<string>(
-                name: "Image",
-                table: "Posts",
+                "Image",
+                "Posts",
                 nullable: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "Image",
-                table: "Posts");
+                "Image",
+                "Posts");
         }
     }
 }

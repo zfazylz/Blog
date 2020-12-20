@@ -1,17 +1,14 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 
 namespace Blog.Data.FileManager
 {
     public class FileManager : IFileManager
     {
-        private string _imagePath;
+        private readonly string _imagePath;
 
         public FileManager(IConfiguration config)
         {
@@ -28,10 +25,7 @@ namespace Blog.Data.FileManager
             try
             {
                 var save_path = Path.Combine(_imagePath);
-                if (!Directory.Exists(save_path))
-                {
-                    Directory.CreateDirectory(save_path);
-                }
+                if (!Directory.Exists(save_path)) Directory.CreateDirectory(save_path);
 
                 //Internet Explorer error C:/user/foo/image.jpg
                 //var fileName = image.FileName;
@@ -47,7 +41,7 @@ namespace Blog.Data.FileManager
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                return "error"; 
+                return "error";
             }
         }
     }

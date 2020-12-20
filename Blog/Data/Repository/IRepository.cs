@@ -1,9 +1,6 @@
-﻿using Blog.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Blog.Models;
 
 namespace Blog.Data.Repository
 {
@@ -14,6 +11,6 @@ namespace Blog.Data.Repository
         void AddPost(Post post);
         void UpdatePost(Post post);
         void RemovePost(int id);
-        Task<bool> SaveChangesAsync(); 
+        Task<bool> SaveChangesAsync();
     }
 }

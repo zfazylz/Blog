@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<Post>
 
-@{ 
+@{
 
 }
 <h2>Admin Panel!</h2>
 
 <div>
     <ul>
-        @foreach(var post in Model)
+        @foreach (var post in Model)
         {
             <li>
                 <a>@post.Title</a>
@@ -16,7 +16,7 @@
                 -
                 <a asp-controller="Panel" asp-action="Remove" asp-route-id="@post.Id">Remove</a>
 
-            
+
             </li>
         }
     </ul>

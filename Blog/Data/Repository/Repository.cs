@@ -1,20 +1,19 @@
-﻿using Blog.Models;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using Blog.Models;
 
 namespace Blog.Data.Repository
 {
     public class Repository : IRepository
     {
-        private AppDbContext _dbContext;
+        private readonly AppDbContext _dbContext;
 
         public Repository(AppDbContext dbContext)
         {
             _dbContext = dbContext;
         }
+
         public void AddPost(Post post)
         {
             _dbContext.Posts.Add(post);
@@ -42,10 +41,7 @@ namespace Blog.Data.Repository
 
         public async Task<bool> SaveChangesAsync()
         {
-            if (await _dbContext.SaveChangesAsync() > 0)
-            {
-                return true;
-            }
+            if (await _dbContext.SaveChangesAsync() > 0) return true;
             return false;
         }
     }
