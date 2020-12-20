@@ -25,7 +25,7 @@ namespace Blog
                 var adminRole = new IdentityRole("Admin");
                 if (!ctx.Roles.Any()) roleManager.CreateAsync(adminRole).GetAwaiter().GetResult();
 
-                if (!ctx.Users.Any(u => u.UserName == "admin2"))
+                if (!ctx.Users.Any(u => u.UserName == "admin"))
                 {
                     var adminUser = new IdentityUser
                     {
