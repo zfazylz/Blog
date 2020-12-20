@@ -19,7 +19,6 @@ namespace Blog
             var host = CreateHostBuilder(args).Build();
             try
             {
-               
                 var scope = host.Services.CreateScope();
 
                 var ctx = scope.ServiceProvider.GetRequiredService<AppDbContext>();
@@ -32,6 +31,7 @@ namespace Blog
                 {
                     roleManager.CreateAsync(adminRole).GetAwaiter().GetResult();
                 }
+
                 if (!ctx.Users.Any(u => u.UserName == "admin2"))
                 {
                     var adminUser = new IdentityUser
@@ -39,25 +39,20 @@ namespace Blog
                         UserName = "admin2",
                         Email = "admin@test.com"
                     };
-                    userManager.CreateAsync(adminUser, "password").GetAwaiter().GetResult();
+                    var result = userManager.CreateAsync(adminUser, "password").GetAwaiter().GetResult();
                     userManager.AddToRoleAsync(adminUser, adminRole.Name).GetAwaiter().GetResult();
                 }
-
             }
             catch (Exception ex)
             {
-
                 Console.WriteLine(ex.Message);
             }
-            
+
             host.Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
+                .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
     }
 }

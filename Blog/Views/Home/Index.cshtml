@@ -3,8 +3,9 @@
 @{
 
 }
-<h2>Home Page!</h2>
-<img src="~/content/static/pexels-photo-1448709.jpeg" alt="Super Puper Blog" />
+<div class="main-img">
+    <span class="title">Amazing Blog Site</span>
+</div>
 <div class="container">
     @foreach (var post in Model)
     {
@@ -15,6 +16,9 @@
                 @post.Title
             </span>
         </a>
+
+
+
     }
 
 </div>

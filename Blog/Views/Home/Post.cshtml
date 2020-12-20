@@ -1,5 +1,11 @@
 ﻿@model Post
+
+@{
+
+}
 <div class="container">
+    <h2>@Model.Title</h2>
+    <p>@Model.Body</p>
     <div class="post no-shadow">
         @if (!string.IsNullOrEmpty(Model.Image))
         {
